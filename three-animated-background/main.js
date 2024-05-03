@@ -1,4 +1,39 @@
 import * as THREE from 'https://unpkg.com/three@0.126.1/build/three.module.js';
+import GUI from 'https://cdn.jsdelivr.net/npm/lil-gui@0.19/+esm';
+
+const gui = new GUI();
+const props = {
+    plane: {
+        width: 10,
+        height: 10,
+        widthSegments: 10,
+        heightSegments: 10,
+    }
+};
+
+gui.add(props.plane, 'width', 1, 20).onChange(generatePlane);
+gui.add(props.plane, 'height', 1, 20).onChange(generatePlane);
+gui.add(props.plane, 'widthSegments', 1, 30).onChange(generatePlane);
+gui.add(props.plane, 'heightSegments', 1, 30).onChange(generatePlane);
+
+function generatePlane() {
+    planeMesh.geometry.dispose();
+    planeMesh.geometry = new THREE.PlaneGeometry(
+        props.plane.width, 
+        props.plane.height, 
+        props.plane.widthSegments, 
+        props.plane.heightSegments,
+    );
+    const {array} = planeMesh.geometry.attributes.position;
+
+    for (let i = 0; i < array.length; i += 3) {
+        const x = array[i];
+        const y = array[i + 1];
+        const z = array[i + 2];
+
+        array[i + 2] = z + Math.random();
+    }
+};
 
 const scene = new THREE.Scene();
 
