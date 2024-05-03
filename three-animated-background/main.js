@@ -1,4 +1,5 @@
 import * as THREE from 'https://unpkg.com/three@0.126.1/build/three.module.js';
+import { OrbitControls } from 'https://unpkg.com/three@0.126.1/examples/jsm/controls/OrbitControls.js';
 import GUI from 'https://cdn.jsdelivr.net/npm/lil-gui@0.19/+esm';
 
 const gui = new GUI();
@@ -49,6 +50,7 @@ renderer.setSize(innerWidth, innerHeight);
 renderer.setPixelRatio(devicePixelRatio);
 document.body.appendChild(renderer.domElement);
 
+new OrbitControls(camera, renderer.domElement);
 camera.position.z = 5;
 
 const planeGeometry = new THREE.PlaneGeometry(
@@ -59,7 +61,7 @@ const planeGeometry = new THREE.PlaneGeometry(
 );
 const planeMaterial = new THREE.MeshPhongMaterial(
     { 
-        color: 0xff0000,
+        color: 0x574AE2,
         side: THREE.DoubleSide,
         flatShading: THREE.FlatShading,
     },
@@ -83,6 +85,13 @@ const light = new THREE.DirectionalLight(
 );
 light.position.set(0, 0, 1);
 scene.add(light);
+
+const backLight = new THREE.DirectionalLight(
+    0xffffff,
+    1,
+);
+backLight.position.set(0, 0, -1);
+scene.add(backLight);
 
 function animate() {
     requestAnimationFrame(animate);
