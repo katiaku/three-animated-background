@@ -5,17 +5,17 @@ import GUI from 'https://cdn.jsdelivr.net/npm/lil-gui@0.19/+esm';
 const gui = new GUI();
 const props = {
     plane: {
-        width: 10,
-        height: 10,
-        widthSegments: 10,
-        heightSegments: 10,
+        width: 24,
+        height: 24,
+        widthSegments: 25,
+        heightSegments: 25,
     }
 };
 
-gui.add(props.plane, 'width', 1, 20).onChange(generatePlane);
-gui.add(props.plane, 'height', 1, 20).onChange(generatePlane);
-gui.add(props.plane, 'widthSegments', 1, 30).onChange(generatePlane);
-gui.add(props.plane, 'heightSegments', 1, 30).onChange(generatePlane);
+gui.add(props.plane, 'width', 1, 50).onChange(generatePlane);
+gui.add(props.plane, 'height', 1, 50).onChange(generatePlane);
+gui.add(props.plane, 'widthSegments', 1, 60).onChange(generatePlane);
+gui.add(props.plane, 'heightSegments', 1, 60).onChange(generatePlane);
 
 function generatePlane() {
     planeMesh.geometry.dispose();
@@ -34,6 +34,13 @@ function generatePlane() {
 
         array[i + 2] = z + Math.random();
     }
+
+    const colors = [];
+    for (let i = 0; i < planeMesh.geometry.attributes.position.count; i++) {
+        colors.push(0, 0.19, 0.4);
+    };
+
+    planeMesh.geometry.setAttribute('color', new THREE.BufferAttribute(new Float32Array(colors), 3));
 };
 
 const raycaster = new THREE.Raycaster();
@@ -56,10 +63,10 @@ new OrbitControls(camera, renderer.domElement);
 camera.position.z = 5;
 
 const planeGeometry = new THREE.PlaneGeometry(
-    5,
-    5,
-    10,
-    10,
+    24,
+    24,
+    25,
+    25,
 );
 const planeMaterial = new THREE.MeshPhongMaterial(
     { 
@@ -83,7 +90,7 @@ for (let i = 0; i < array.length; i += 3) {
 
 const colors = [];
 for (let i = 0; i < planeMesh.geometry.attributes.position.count; i++) {
-    colors.push(1, 0, 0);
+    colors.push(0, 0.19, 0.4);
 };
 
 planeMesh.geometry.setAttribute('color', new THREE.BufferAttribute(new Float32Array(colors), 3));
@@ -115,17 +122,17 @@ function animate() {
     const intersects = raycaster.intersectObject(planeMesh);
     if (intersects.length > 0) {
         const {color} = intersects[0].object.geometry.attributes;
-        color.setX(intersects[0].face.a, 0);
-        color.setY(intersects[0].face.a, 0);
+        color.setX(intersects[0].face.a, 0.1);
+        color.setY(intersects[0].face.a, 0.5);
         color.setZ(intersects[0].face.a, 1);
 
-        color.setX(intersects[0].face.b, 0);
-        color.setY(intersects[0].face.b, 0);
-        color.setZ(intersects[0].face.a, 1);
+        color.setX(intersects[0].face.b, 0.1);
+        color.setY(intersects[0].face.b, 0.5);
+        color.setZ(intersects[0].face.b, 1);
 
-        color.setX(intersects[0].face.c, 0);
-        color.setY(intersects[0].face.c, 0);
-        color.setZ(intersects[0].face.a, 1);
+        color.setX(intersects[0].face.c, 0.1);
+        color.setY(intersects[0].face.c, 0.5);
+        color.setZ(intersects[0].face.c, 1);
         color.needsUpdate = true;
     }
 };
