@@ -5,17 +5,17 @@ import GUI from 'https://cdn.jsdelivr.net/npm/lil-gui@0.19/+esm';
 const gui = new GUI();
 const props = {
     plane: {
-        width: 24,
-        height: 24,
-        widthSegments: 25,
-        heightSegments: 25,
+        width: 400,
+        height: 400,
+        widthSegments: 50,
+        heightSegments: 50,
     }
 };
 
-gui.add(props.plane, 'width', 1, 50).onChange(generatePlane);
-gui.add(props.plane, 'height', 1, 50).onChange(generatePlane);
-gui.add(props.plane, 'widthSegments', 1, 60).onChange(generatePlane);
-gui.add(props.plane, 'heightSegments', 1, 60).onChange(generatePlane);
+gui.add(props.plane, 'width', 1, 800).onChange(generatePlane);
+gui.add(props.plane, 'height', 1, 800).onChange(generatePlane);
+gui.add(props.plane, 'widthSegments', 1, 100).onChange(generatePlane);
+gui.add(props.plane, 'heightSegments', 1, 100).onChange(generatePlane);
 
 function generatePlane() {
     planeMesh.geometry.dispose();
@@ -60,13 +60,13 @@ renderer.setPixelRatio(devicePixelRatio);
 document.body.appendChild(renderer.domElement);
 
 new OrbitControls(camera, renderer.domElement);
-camera.position.z = 5;
+camera.position.z = 10;
 
 const planeGeometry = new THREE.PlaneGeometry(
-    24,
-    24,
-    25,
-    25,
+    400,
+    400,
+    500,
+    500,
 );
 const planeMaterial = new THREE.MeshPhongMaterial(
     { 
@@ -99,7 +99,7 @@ const light = new THREE.DirectionalLight(
     0xffffff,
     1,
 );
-light.position.set(0, 0, 1);
+light.position.set(0, 1, 1);
 scene.add(light);
 
 const backLight = new THREE.DirectionalLight(

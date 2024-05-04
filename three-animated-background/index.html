@@ -5,14 +5,46 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Three Animated Background</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
       body {
         margin: 0;
+        -webkit-font-smoothing: antialiased;
+      }
+      .font-exo-two {
+        font-family: "Exo 2", sans-serif;
+      }
+      .font-space-mono {
+        font-family: "Space Mono", monospace;
       }
     </style>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <div 
+        class="absolute text-center text-white"
+        style="top: 50%; transform: translate(-50%, -50%); left: 50%;"
+      >
+        <h1 class="font-space-mono text-sm uppercase tracking-wide">
+          Three.js Project
+        </h1>
+        <p class="font-exo-two text-4xl font-bold mt-4">
+          ONE WITH AN EVERLASTING DESIRE FOR THE UNKNOWN & UNTOLD
+        </p>
+        <a 
+          href="https://www.youtube.com/watch?v=YK1Sw_hnm58&list=WL&index=5" 
+          class="border px-4 py-2 rounded-lg text-sm font-space-mono uppercase hover:bg-white hover:text-gray-800 inline-block mt-12"
+        >
+          Go to the Tutorial!
+        </a>
+      </div>
+    </div>
     <script type="module" src="/main.js"></script>
   </body>
 </html>
